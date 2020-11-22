@@ -27,7 +27,7 @@ public class Shell : MonoBehaviour
         }
 
         if (other.gameObject.name.Contains("Player")){
-            Debug.Log("PLAYER");
+            Destroy(gameObject);
         }
 
     }

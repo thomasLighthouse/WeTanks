@@ -7,7 +7,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb;
     public GameObject playerGun;
     public GameObject shell;
+    public GameObject treadTracks;
     public float speed = 2f;
+    private bool trackFlag = false;
 
     GameObject gun;
     // Start is called before the first frame update
@@ -31,8 +33,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey("w")) {
             _rb.velocity = speed * transform.up;
+            SpawnTracks(true);
         } else if (Input.GetKey("s")) {
             _rb.velocity = -speed * transform.up;
+            SpawnTracks(false);
         } else {
             _rb.velocity = new Vector2(0, 0);
         }
@@ -43,5 +47,35 @@ public class Player : MonoBehaviour
         
         gun.transform.position = transform.position - 0.22f * transform.up;
 
+    }
+
+    internal void OnCollisionEnter2D (Collision2D other) {
+
+        if (other.gameObject.name.Contains("Shell")){
+            Destroy(gameObject);
+            Destroy(gun);
+        }
+
+    }
+
+    internal void SpawnTracks(bool forward){
+        if (!trackFlag){
+            Vector3 rot = transform.rotation.eulerAngles;
+            float direction = 1f;
+            if (!forward) {
+                direction = -1f;
+                rot = new Vector3(rot.x,rot.y,rot.z - 180f);
+            }
+
+
+            Instantiate(treadTracks, new Vector3(transform.position.x, transform.position.y, 2) - direction * 0.35f * transform.up - 0.21f * transform.right, Quaternion.Euler(rot));
+            Instantiate(treadTracks, new Vector3(transform.position.x, transform.position.y, 2) - direction * 0.35f * transform.up + 0.21f * transform.right, Quaternion.Euler(rot));
+            Invoke("ResetTrackFlag", 0.05f);
+            trackFlag = true;
+        }
+    }
+
+    internal void ResetTrackFlag(){
+        trackFlag = false;
     }
 }

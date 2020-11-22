@@ -99,6 +99,8 @@ MonoBehaviour:
   playerGun: {fileID: 448481025153344855, guid: d3e8560776472344485d0fa70df8b621,
     type: 3}
   shell: {fileID: 3314055857314296891, guid: 05a6df02c5f33e843813a4fe5f1d1e0b, type: 3}
+  treadTracks: {fileID: 5350840955131613760, guid: f1fd5a59fa9e2ee459fea31aa61ce1bc,
+    type: 3}
   speed: 2
 --- !u!50 &6260175777358454277
 Rigidbody2D:
