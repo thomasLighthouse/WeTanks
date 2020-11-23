@@ -68,8 +68,8 @@ public class Player : MonoBehaviour
             }
 
 
-            Instantiate(treadTracks, new Vector3(transform.position.x, transform.position.y, 2) - direction * 0.35f * transform.up - 0.21f * transform.right, Quaternion.Euler(rot));
-            Instantiate(treadTracks, new Vector3(transform.position.x, transform.position.y, 2) - direction * 0.35f * transform.up + 0.21f * transform.right, Quaternion.Euler(rot));
+            Instantiate(treadTracks, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1) - direction * 0.35f * transform.up - 0.21f * transform.right, Quaternion.Euler(rot));
+            Instantiate(treadTracks, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1) - direction * 0.35f * transform.up + 0.21f * transform.right, Quaternion.Euler(rot));
             Invoke("ResetTrackFlag", 0.05f);
             trackFlag = true;
         }
