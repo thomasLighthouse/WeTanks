@@ -23,30 +23,43 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKey("a")) {
-            _rb.angularVelocity = 150;
-        } else if (Input.GetKey("d")) {
-            _rb.angularVelocity = -150;
-        } else {
-            _rb.angularVelocity = 0;
-        }
+        if (Game.GameActive)
+        {
+            if (Input.GetKey("a"))
+            {
+                _rb.angularVelocity = 150;
+            }
+            else if (Input.GetKey("d"))
+            {
+                _rb.angularVelocity = -150;
+            }
+            else
+            {
+                _rb.angularVelocity = 0;
+            }
 
-        if (Input.GetKey("w")) {
-            _rb.velocity = speed * transform.up;
-            SpawnTracks(true);
-        } else if (Input.GetKey("s")) {
-            _rb.velocity = -speed * transform.up;
-            SpawnTracks(false);
-        } else {
-            _rb.velocity = new Vector2(0, 0);
-        }
+            if (Input.GetKey("w"))
+            {
+                _rb.velocity = speed * transform.up;
+                SpawnTracks(true);
+            }
+            else if (Input.GetKey("s"))
+            {
+                _rb.velocity = -speed * transform.up;
+                SpawnTracks(false);
+            }
+            else
+            {
+                _rb.velocity = new Vector2(0, 0);
+            }
 
-        if (Input.GetMouseButtonDown(0)) {
-            Instantiate(shell, gun.transform.position + .95f * gun.transform.up, gun.transform.rotation);
-        }
-        
-        gun.transform.position = transform.position - 0.22f * transform.up;
+            if (Input.GetMouseButtonDown(0))
+            {
+                Instantiate(shell, gun.transform.position + .95f * gun.transform.up, gun.transform.rotation);
+            }
 
+            gun.transform.position = transform.position - 0.22f * transform.up;
+        }
     }
 
     internal void OnCollisionEnter2D (Collision2D other) {

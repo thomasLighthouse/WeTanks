@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallSpawner : MonoBehaviour
+public class WallSpawner
 {
     private Camera Cam;
     private Vector2 BottomLeft;
     private Vector2 BottomRight;
     private Vector2 TopLeft;
     private Vector2 TopRight;
-    // Start is called before the first frame update
-    void Start()
+    // StartGame is called by Game, once the main game is entered
+    public void SpawnWalls()
     {
         Cam = Camera.main; 
         BottomLeft = Cam.ViewportToWorldPoint(new Vector2(0, 0));
@@ -32,11 +32,5 @@ public class WallSpawner : MonoBehaviour
         leftWall.transform.localScale = new Vector3(leftWall.transform.localScale.x, TopRight.y, 1);
         //Debug.Log(Screen.width);
         //Debug.Log(Screen.height);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
