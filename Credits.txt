@@ -1,0 +1,11 @@
+Code:
+Movement partially lifted from Thomas Barnett's GameJam assignment. 
+Shell bounce partially lifted from John Banta's Freestyle assignment.
+Rotate to Mouse from Unity Forums
+https://answers.unity.com/questions/883357/rotating-object-to-face-mouse-with-physics-isnt-wo.html
+
+
+Assets:
+https://free-game-assets.itch.io/free-2d-tank-game-assets
+https://gamesupply.itch.io/150-repeat-backgrounds-textures
+https://www.sounds-resource.com/wii/wiiplay/sound/28569/?source=genre
