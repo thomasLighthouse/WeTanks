@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody2D>();
-        gun = Instantiate(playerGun, transform.position + 0.22f * Vector3.down, Quaternion.identity);
+        gun = Instantiate(playerGun, transform.position + 0.22f * Vector3.down + Vector3.back, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
                 Instantiate(shell, gun.transform.position + .95f * gun.transform.up, gun.transform.rotation);
             }
 
-            gun.transform.position = transform.position - 0.22f * transform.up;
+            gun.transform.position = transform.position - 0.22f * transform.up + Vector3.back;
         }
     }
 
