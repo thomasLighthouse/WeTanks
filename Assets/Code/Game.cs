@@ -11,6 +11,13 @@ public class Game : MonoBehaviour
     private static PauseMenu ThePauseMenu;
     private static LevelSelectMenu TheLevelSelectMenu;
     private static WallSpawner ws;
+
+    public GameObject LevelWin;
+    public GameObject LevelLoss;
+    public GameObject GameWin;
+    private bool endFlag = false;
+    private bool gameLost = false;
+    private int curScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +26,7 @@ public class Game : MonoBehaviour
         ThePauseMenu = new PauseMenu();
         TheLevelSelectMenu = new LevelSelectMenu();
         Game.GameActive = false;
+        curScene = int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5));
     }
 
     public static void StartGame()
@@ -45,10 +53,43 @@ public class Game : MonoBehaviour
     {
         if (GameActive)
         {
+
+            if (!endFlag){
+                if (GameObject.Find("Player") == null){
+                    Instantiate(LevelLoss, new Vector3(0, 0, 0), Quaternion.identity);
+                    endFlag = true;
+                    gameLost = true;
+                }
+
+                if (Object.FindObjectsOfType(typeof(TurretBase)).Length == 0){
+                    if (curScene != 5) {
+                        Instantiate(LevelWin, new Vector3(0, 0, 0), Quaternion.identity);
+                    } else {
+                        Instantiate(GameWin, new Vector3(0, 0, 0), Quaternion.identity);
+                    }
+                    
+                    endFlag = true;
+                }
+            } else {
+                if (Input.GetKeyDown("space") && gameLost)
+                {
+                    LoadScene(curScene);
+                } else if (Input.GetKeyDown("space")) {
+                    if (curScene != 5) {
+                        LoadScene(curScene + 1);
+                    } else {
+                        LoadScene(curScene);
+                    }
+                }
+            }
+
+
             if (Input.GetKey("p"))
             {
                 ThePauseMenu.openMenu();
             }
+
+
         }
     }
     

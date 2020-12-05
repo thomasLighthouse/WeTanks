@@ -123,3 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretGun: {fileID: 6616418950360233352, guid: 6b130abce0323444ea0cf3efd0746813,
     type: 3}
+  shell: {fileID: 3314055857314296891, guid: 05a6df02c5f33e843813a4fe5f1d1e0b, type: 3}
+  explosion: {fileID: 7866932497142529748, guid: ecc3f41a56e8675469919a43d3b68d5e,
+    type: 3}

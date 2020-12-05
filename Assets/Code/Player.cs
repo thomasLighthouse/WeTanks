@@ -8,13 +8,21 @@ public class Player : MonoBehaviour
     public GameObject playerGun;
     public GameObject shell;
     public GameObject treadTracks;
+    public GameObject explosion;
     public float speed = 2f;
     private bool trackFlag = false;
 
     GameObject gun;
+
+    private bool soundFlag = false;
+    public AudioClip moveA;
+    public AudioClip moveB;
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody2D>();
         gun = Instantiate(playerGun, transform.position + 0.22f * Vector3.down, Quaternion.identity);
     }
@@ -65,6 +73,7 @@ public class Player : MonoBehaviour
     internal void OnCollisionEnter2D (Collision2D other) {
 
         if (other.gameObject.name.Contains("Shell")){
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
             Destroy(gun);
         }
@@ -73,6 +82,13 @@ public class Player : MonoBehaviour
 
     internal void SpawnTracks(bool forward){
         if (!trackFlag){
+            if (soundFlag){
+                audioSource.PlayOneShot(moveA, 0.05f);
+                soundFlag = false;
+            } else {
+                audioSource.PlayOneShot(moveB, 0.05f);
+                soundFlag = true;
+            }
             Vector3 rot = transform.rotation.eulerAngles;
             float direction = 1f;
             if (!forward) {

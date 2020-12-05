@@ -6,11 +6,17 @@ public class Shell : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private Vector2 v; // velocityBeforePhysicsUpdate;
+    public GameObject puffExplosion;
+    
     public float speed = 2f;
     private int bounces = 0;
+
+    public AudioClip bounceSound;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = speed * transform.up;
         v = _rb.velocity;
@@ -26,7 +32,13 @@ public class Shell : MonoBehaviour
     {
         if (other.gameObject.name.Contains("Player"))
         {
-            Destroy(gameObject);
+            BlowUpShell();
+        } else if (other.gameObject.name.Contains("Shell")) {
+            BlowUpShell();
+        } else if (other.gameObject.name.Contains("Turret Base")) {
+            BlowUpShell();
+        } else if (other.gameObject.name.Contains("Destructible Wall")) {
+            BlowUpShell();
         }
 
         else
@@ -58,10 +70,18 @@ public class Shell : MonoBehaviour
             _rb.angularVelocity = 0;
             if (bounces > 2)
             {
-                Destroy(gameObject);
+                BlowUpShell();
+            } else {
+                audioSource.PlayOneShot(bounceSound, 0.05f);
             }
         }
 
+    }
+
+
+    internal void BlowUpShell(){
+        Instantiate(puffExplosion, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 
 
